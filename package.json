@@ -1,12 +1,15 @@
 {
   "name": "nodeexpressmongodb",
   "version": "1.0.0",
-  "description": "Curso na Udemy para node express e mongoDB",
-  "main": "app.js",
+  "description": "Servidor node usando express e mongoDB",
+  "main": "index.js",
   "scripts": {
-    "run": "node app.js",
-    "dev": "node app.js",
-    "test": "node app.js"
+    "start": "node index.js",
+    "dev": "node index.js >> log.txt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/viniciusvts/nodeExpressMongoDB"
   },
   "keywords": [
     "node",
@@ -16,6 +19,8 @@
   "author": "Vinicius de Santana",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.4"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.19"
   }
 }
