@@ -2,7 +2,7 @@
  * @author Vinicius de Santana
  * @description servidor node utilizando MongoDB
  * npm init
- * npm install express body-parser mongoose --save
+ * npm install express body-parser mongoose bcrypt jsonwebtoken --save
  */
 console.log("APP: Iniciando...")
  //express e rotas
@@ -16,9 +16,9 @@ const bodyParser = require('body-parser');
 app.use( bodyParser.urlencoded( { extended: true }));
 app.use( bodyParser.json() );
 //BD
-console.log("BD: Start BD")
+console.log("BD: Start connection")
 const mongoose = require('mongoose');
-const uri = require('./assets/keys'); // a uri com user e senha está aqui
+const uri = require('./assets/keys').mongodb; // a uri com user e senha está aqui
 const options = { reconnectTries: Number.MAX_VALUE,
     reconnectInterval: 500,
     poolSize: 5,
