@@ -1,0 +1,40 @@
+version: "3.1"
+networks:
+  intra:
+  extra:
+  
+services:
+  app:
+    container_name: nodeapp
+    build: .
+    depends_on:
+      - mongo
+    ports:
+      - "8080:8080"
+    networks:
+      - intra
+      - extra
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 5
+        window: 120s
+  mongo:
+    image: 'mongo'
+    container_name: mongoapp
+    image: mongo
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - "27017"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 5
+        window: 120s
+    networks:
+      intra:
+        aliases:
+          - mongodb
