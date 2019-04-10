@@ -20,12 +20,11 @@ router.get('/',(req, res)=>{
  * lança novo usuário no banco e retorna esse usuário (sem a senha).
  */
 router.post('/create', (req, res)=>{
-    console.log(req.body);
-    const obj = req.body;
+    console.log("APP: POST to: /users/create from: " + req.ip); //logs
     if (!obj.email || !obj.pass) return res.send({error: "Dados incorretos ou faltantes"});
     Users.findOne( {email: obj.email}, (err, data)=>{
         if (err) return res.send( {error: "Erro no banco"});
-        if (data) return res.send( {message: "Usuário já existe"});
+        if (data) return res.send( {error: "Usuário já existe"});
 
         Users.create( obj, (err, data)=>{
             if (err) return res.send( {error: "Erro no banco"});
