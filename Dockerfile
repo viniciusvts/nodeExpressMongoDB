@@ -4,4 +4,5 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app/
 RUN npm install
 EXPOSE 8080
+RUN export NODE_ENV=prod
 CMD ["npm","start"]
