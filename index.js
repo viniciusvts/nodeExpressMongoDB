@@ -9,8 +9,8 @@ const config = require('./config/config');
  //express e rotas
 const express = require('express');
 const app = express();
-const routeIndex = require('./routes/index'); //rotas '/'
-const routeUsers = require('./routes/users'); //rotas '/users'
+const routeIndex = require('./routes/indexRoute'); //rotas '/'
+const routeUsers = require('./routes/usersRoute'); //rotas '/users/'
 //util
 const port = 8080;
 const bodyParser = require('body-parser');

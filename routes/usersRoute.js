@@ -10,7 +10,7 @@ const route = "/users/";
 */
 router.get('/', auth.verify,(req, res)=>{
     console.log("APP: GET to: "+route+" from: " + req.ip); //logs
-    id_do_solicitante = res.locals.token_id;
+    id_do_solicitante = res.locals.token_id.id;
     console.log( id_do_solicitante );
     Users.find({}, (err, data)=>{
         if (err) return res.status(500).send( {error: "erro na consulta"} );
