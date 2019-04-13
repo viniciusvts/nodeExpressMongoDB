@@ -38,6 +38,18 @@ mongoose.connection.on('disconnected', ()=>{
 })
 mongoose.connection.on('connected', ()=>{
     console.log("BD: conectado");
+    //se for a primeira vez que o sistema inicia, não há admin, então crio um
+    Users = require("./model/userSchema");
+    Users.findOne( {admin: true}, (err, data)=>{
+        if (err) console.log(" APP: erro ao verificar existencia de admins");
+        if (!data) {
+            Users.create( {email:"admin", pass: "admin", admin:true}, (err, data)=>{
+                if (err) console.log(" APP: erro ao criar primeiro admin");
+                console.log(" APP: primeiro admin criado");
+                console.log(data);
+            });
+        }
+    });
 })
 
 
