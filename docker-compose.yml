@@ -4,22 +4,25 @@ networks:
   extra:
   
 services:
-  app:
+  node:
     container_name: nodeapp
+    volumes:
+      - .:/usr/src/app
     build: .
     depends_on:
       - mongo
     ports:
-      - "8080:8080"
-    networks:
-      - intra
-      - extra
+      - "8080"
     deploy:
       restart_policy:
         condition: on-failure
         delay: 10s
         max_attempts: 5
         window: 120s
+    networks:
+      intra:
+        aliases:
+          - nodeapp
   mongo:
     image: 'mongo'
     container_name: mongoapp
@@ -38,3 +41,13 @@ services:
       intra:
         aliases:
           - mongodb
+  nginx:
+    image: nginx:1.13
+    container_name: nginxapp
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx
+    networks:
+      - intra
+      - extra
