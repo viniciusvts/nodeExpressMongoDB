@@ -4,8 +4,8 @@
   "description": "Servidor node usando express e mongoDB",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "node index.js >> log.txt"
+    "start": "node index.js >> log.txt",
+    "dev": "node index.js"
   },
   "repository": {
     "type": "git",
