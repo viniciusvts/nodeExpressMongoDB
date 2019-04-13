@@ -4,13 +4,14 @@
  * npm init
  * npm install express body-parser mongoose bcrypt jsonwebtoken --save
  */
-console.log("APP: Iniciando...")
-const config = require('./config/config');
+console.log("APP: Iniciando...");
+const config = require('./config/config'); //APP: API em ambiente DEV||PROD
  //express e rotas
 const express = require('express');
 const app = express();
 const routeIndex = require('./routes/indexRoute'); //rotas '/'
 const routeUsers = require('./routes/usersRoute'); //rotas '/users/'
+const routeBlog = require('./routes/blogRoute'); //rotas '/blog/'
 //util
 const port = 8080;
 const bodyParser = require('body-parser');
@@ -52,9 +53,10 @@ mongoose.connection.on('connected', ()=>{
     });
 })
 
-
-app.use('/', routeIndex); //rotas '/'
-app.use('/users', routeUsers); //rotas '/users'
+// as rotas
+app.use('/', routeIndex);
+app.use('/users', routeUsers);
+app.use('/blog', routeBlog);
 
 app.listen(port, ()=>{
     console.log( "APP: Servidor escutando na porta " + port );
