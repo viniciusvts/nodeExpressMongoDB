@@ -1,4 +1,4 @@
-const env = process.env.NODE_ENV || 'dev'; 
+const env = 'prod'; 
 
 const config = () => {
     switch (env)
@@ -7,7 +7,7 @@ const config = () => {
     return{
         mongodb: 'mongodb://localhost:27017/test',
         jsonWebToken: 'senhaSegura(ouNao)',
-        jsonWebTokenExpiresTime: "2m"
+        jsonWebTokenExpiresTime: "5m"
     }
 
     case 'prod':
