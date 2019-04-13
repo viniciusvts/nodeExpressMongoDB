@@ -4,19 +4,31 @@ const Users = require('../model/userSchema');
 const bcrypt = require('bcrypt');
 const auth = require('../middlewares/auth');
 const route = "/users/";
+
 //rotas
+
 /** 
- * @description retorna todos os usuários do banco
+ * @description retorna todos os users do banco caso o user seja adm
+ * retorna só o próprio user caso seja user comum
 */
 router.get('/', auth.verify,(req, res)=>{
     console.log("APP: GET to: "+route+" from: " + req.ip); //logs
-    id_do_solicitante = res.locals.token_id.id;
-    console.log( id_do_solicitante );
-    Users.find({}, (err, data)=>{
+
+    userId = res.locals.token_id.id;
+    userIsAdmin = res.locals.isAdmin;
+    console.log("user: "+userId );
+    if(userIsAdmin){
+        Users.find({}, (err, data)=>{
+            if (err) return res.status(500).send( {error: "erro na consulta"} );
+            return res.send(data);
+        });
+    }
+    //se não for admin
+    Users.findOne( {_id: userId }, (err, data)=>{
         if (err) return res.status(500).send( {error: "erro na consulta"} );
         return res.send(data);
     });
-})
+});
 
 /**
  * @description cria novo usuário no banco
@@ -24,21 +36,28 @@ router.get('/', auth.verify,(req, res)=>{
  * procura se já existe usuário no banco
  * lança novo usuário no banco e retorna esse usuário (sem a senha).
  */
-router.post('/create', (req, res)=>{
+router.post('/create', auth.verify, (req, res)=>{
     console.log("APP: POST to: "+route+"create from: " + req.ip); //logs
-    const obj = req.body;
-    if (!obj.email || !obj.pass)
-        return res.status(400).send({error: "Dados incorretos ou faltantes"});
-    Users.findOne( {email: obj.email}, (err, data)=>{
-        if (err) return res.status(500).send( {error: "Erro no banco"});
-        if (data) return res.status(400).send( {error: "Usuário já existe"});
-
-        Users.create( obj, (err, data)=>{
+    userId = res.locals.token_id.id;
+    userIsAdmin = res.locals.isAdmin;
+    console.log("user: "+userId );
+    if( userIsAdmin ){
+        const obj = req.body;
+        if (!obj.email || !obj.pass)
+            return res.status(400).send({error: "Dados incorretos ou faltantes"});
+        Users.findOne( {email: obj.email}, (err, data)=>{
             if (err) return res.status(500).send( {error: "Erro no banco"});
-            data.pass = undefined;
-            return res.status(201).send( data );
+            if (data) return res.status(400).send( {error: "Usuário já existe"});
+
+            Users.create( obj, (err, data)=>{
+                if (err) return res.status(500).send( {error: "Erro no banco"});
+                data.pass = undefined;
+                return res.status(201).send( data );
+            });
         });
-    });
+    }
+    //se o usuário solicitante não for admin
+    res.status(401).send( {error: "Usuário não autorizado"});
 });
 
 /**
