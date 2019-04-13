@@ -13,11 +13,11 @@ router.get('/',(req, res)=>{
         mensagem += "nenhum nome recebido";
     }
     return res.send({ route: route, message: mensagem });
-})
+});
 router.post('/', (req, res)=>{
     console.log("APP: POST to: "+route+" from: " + req.ip); //logs
     return res.send({ route: route, message:"POST ok"});
-})
+});
 //fim rotas
 
 module.exports = router;
