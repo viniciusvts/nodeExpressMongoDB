@@ -5,13 +5,11 @@
  * npm install express body-parser mongoose bcrypt jsonwebtoken --save
  */
 console.log("APP: Iniciando...");
+//configurações
 const config = require('./config/config'); //APP: API em ambiente DEV||PROD
- //express e rotas
+ //express
 const express = require('express');
 const app = express();
-const routeIndex = require('./routes/indexRoute'); //rotas '/'
-const routeUsers = require('./routes/usersRoute'); //rotas '/users/'
-const routeBlog = require('./routes/blogRoute'); //rotas '/blog/'
 //util
 const port = 8080;
 const bodyParser = require('body-parser');
@@ -31,9 +29,6 @@ mongoose.connect(uri, options, (err)=>{
         console.log("BD: Erro ao conectar >>>>>>\n", err);
     }
 })
-/*mongoose.connection.on('error', ()=>{
-    console.log("BD: Erro na conexão");
-})*/
 mongoose.connection.on('disconnected', ()=>{
     console.log("BD: desconectado");
 })
@@ -53,8 +48,13 @@ mongoose.connection.on('connected', ()=>{
     });
 })
 
-// as rotas
-app.use('/', routeIndex);
+// instanciando as rotas
+//const routeIndex = require('./routes/indexRoute'); //rotas '/'
+const routeUsers = require('./routes/usersRoute'); //rotas '/users/'
+const routeBlog = require('./routes/blogRoute'); //rotas '/blog/'
+// aplicando as rotas
+//app.use('/', routeIndex);
+app.use( express.static('/www'))
 app.use('/users', routeUsers);
 app.use('/blog', routeBlog);
 
