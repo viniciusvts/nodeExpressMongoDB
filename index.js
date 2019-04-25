@@ -54,7 +54,7 @@ const routeUsers = require('./routes/usersRoute'); //rotas '/users/'
 const routeBlog = require('./routes/blogRoute'); //rotas '/blog/'
 // aplicando as rotas
 //app.use('/', routeIndex);
-app.use( express.static('/www'))
+app.use( '/', express.static('./www'))
 app.use('/users', routeUsers);
 app.use('/blog', routeBlog);
 
