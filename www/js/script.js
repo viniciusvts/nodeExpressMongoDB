@@ -12,25 +12,25 @@ const getContent = (_url)=>{
 }
 $(document).ready(()=>{
     //carrega a home ao primeiro carregamento
-    getContent("/assets/home.html");
+    getContent("/pages/home.html");
     //manipulação dos clicks da nav bar
     $('#home').on("click", ()=>{
         $("#home").addClass("active");
         $("#blog").removeClass("active");
         $("#sobre").removeClass("active");
-        getContent("/assets/home.html");
+        getContent("/pages/home.html");
     });
     $('#blog').on("click", ()=>{
         $("#home").removeClass("active");
         $("#blog").addClass("active");
         $("#sobre").removeClass("active");
-        getContent("/assets/blog.html");
+        getContent("/pages/blog.html");
     });
     $('#sobre').on("click", ()=>{
         $("#home").removeClass("active");
         $("#blog").removeClass("active");
         $("#sobre").addClass("active");
-        getContent("/assets/sobre.html");
+        getContent("/pages/sobre.html");
     });
 
 });
