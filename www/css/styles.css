@@ -1,18 +1,28 @@
 :root {
   --primary: #38cd24;
   --secondary: #ecf32d;
-  --sucess: #28a745;
-  --info: #17a2b8;
-  --warning: #ffc187;
-  --danger: #dc3545;
-}
-body{
-  background-color: var(--secondary);
 }
 #navbar, #foobar{
   background-color: var(--secondary);
 }
-#content{
-  min-height: 300px;
+#navbar{
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+#foobar{
+  bottom: 0%;
+  width: 100%;
+}
+a.nav-link{
+  color: var(--primary);
+  background-color: var(--secondary);
+}
+a.nav-link.active{
+  background-color: var(--primary) !important;
+  
+}
+#content-mid{
+  min-height: 600px;
   background-color: white;
 }
