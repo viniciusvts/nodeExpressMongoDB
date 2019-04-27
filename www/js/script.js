@@ -1,36 +1,38 @@
 //definição de variáveis e métodos
 const progressBar = "<div class='progress'><div class='progress-bar progress-bar-striped progress-bar-animated' role='progressbar' aria-valuenow='80' aria-valuemin='0' aria-valuemax='100' style='width: 75%'></div></div>";
-const getContent = (_url)=>{
-    $("#content").html(progressBar)
+const pagesUrl = "/pages/";
+const getContentMid = (_item)=>{
+    _divId = "#content-mid"
+    $(_divId).html(progressBar)
     $.ajax({
         type: "GET",
-        url: _url,
+        url: pagesUrl + _item,
         success: ( data )=>{
-            $("#content").html(data);
+            $(_divId).html(data);
         }
     });
-}
+}   
 $(document).ready(()=>{
-    //carrega a home ao primeiro carregamento
-    getContent("/pages/home.html");
+    //carrega o primeiro carregamento
+    getContentMid("home.html");
     //manipulação dos clicks da nav bar
     $('#home').on("click", ()=>{
         $("#home").addClass("active");
         $("#blog").removeClass("active");
         $("#sobre").removeClass("active");
-        getContent("/pages/home.html");
+        getContentMid("home.html");
     });
     $('#blog').on("click", ()=>{
         $("#home").removeClass("active");
         $("#blog").addClass("active");
         $("#sobre").removeClass("active");
-        getContent("/pages/blog.html");
+        getContentMid("blog.html");
     });
     $('#sobre').on("click", ()=>{
         $("#home").removeClass("active");
         $("#blog").removeClass("active");
         $("#sobre").addClass("active");
-        getContent("/pages/sobre.html");
+        getContentMid("sobre.html");
     });
 
 });
