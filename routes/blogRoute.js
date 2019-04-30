@@ -20,12 +20,13 @@ router.get('/', auth.verify,(req, res)=>{
             if (err) return res.status(500).send( {error: "erro na consulta"} );
             return res.send(data);
         });
-    }
-    //se o solicitante não é administrador retorna só os posts proprios
-    Blog.find({ idAuthor: userID }, (err, data)=>{
-        if (err) return res.status(500).send( {error: "erro na consulta"} );
-        return res.send(data);
-    });
+    }else{
+        //se o solicitante não é administrador retorna só os posts proprios
+        Blog.find({ idAuthor: userID }, (err, data)=>{
+            if (err) return res.status(500).send( {error: "erro na consulta"} );
+            return res.send(data);
+        })
+    };
 })
 
 /**

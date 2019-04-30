@@ -22,12 +22,13 @@ router.get('/', auth.verify,(req, res)=>{
             if (err) return res.status(500).send( {error: "erro na consulta"} );
             return res.send(data);
         });
+    }else{
+        //se não for admin
+        Users.findOne( {_id: userId }, (err, data)=>{
+            if (err) return res.status(500).send( {error: "erro na consulta"} );
+            return res.send(data);
+        });
     }
-    //se não for admin
-    Users.findOne( {_id: userId }, (err, data)=>{
-        if (err) return res.status(500).send( {error: "erro na consulta"} );
-        return res.send(data);
-    });
 });
 
 /**
