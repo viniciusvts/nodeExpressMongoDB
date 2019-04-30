@@ -17,7 +17,7 @@ const blogSchema = new Schema({
         }
     ],
     likes: { type: Number, default: 0 },
-    hidden: { type: Boolean, default: true}
+    hidden: { type: Boolean, default: false}
 });
 
 module.exports = mongoose.model( 'Blog', blogSchema);
