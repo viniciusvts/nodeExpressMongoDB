@@ -9,6 +9,9 @@ const getContentMid = (_item)=>{
         url: pagesUrl + _item,
         success: ( data )=>{
             $(_divId).html(data);
+        },
+        error: (textStatus)=>{
+            $(_divId).html("Não foi possivel completar a solicitação: " + textStatus.responseJSON.error);
         }
     });
 }   
