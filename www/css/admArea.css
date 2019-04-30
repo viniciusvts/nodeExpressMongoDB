@@ -1,0 +1,41 @@
+:root {
+  --primary: #38cd24;
+  --secondary: #ecf32d;
+}
+#navbar, #foobar{
+  background-color: var(--secondary);
+}
+#navbar{
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+#foobar{
+  bottom: 0%;
+  width: 100%;
+}
+a.nav-link{
+  color: var(--primary);
+  background-color: var(--secondary);
+}
+a.nav-link.active{
+  background-color: var(--primary) !important;
+}
+#content-mid{
+  min-height: 600px;
+  background-color: white;
+}
+#content-mid .card{
+  width: 75%;
+  left: 12%;
+  margin-top: 10px;
+}
+#login{
+    width: 50%;
+    top: 25%;
+    left: 25%;
+    position: absolute;
+}
+#messageLogin{
+  color: red;
+}
