@@ -39,7 +39,7 @@ mongoose.connection.on('connected', ()=>{
     Users.findOne( {admin: true}, (err, data)=>{
         if (err) console.log(" APP: erro ao verificar existencia de admins");
         if (!data) {
-            Users.create( {email:"admin", pass: "admin", admin:true}, (err, data)=>{
+            Users.create( {email:"admin@admin.com", pass: "admin", admin:true}, (err, data)=>{
                 if (err) console.log(" APP: erro ao criar primeiro admin");
                 console.log(" APP: primeiro admin criado");
                 console.log(data);
