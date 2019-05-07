@@ -12,6 +12,8 @@ services:
       - mongo
     ports:
       - "8080"
+    links:
+      - mongo
     deploy:
       restart_policy:
         condition: always
@@ -39,8 +41,13 @@ services:
   nginx:
     image: nginx:1.13
     container_name: nginxapp
+    depends_on:
+      - node
     ports:
       - "80:80"
+      - "443:443"
+    links:
+      - node
     deploy:
       restart_policy:
         condition: always
