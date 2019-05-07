@@ -1,3 +1,5 @@
 node_modules/
 data/
 log.txt
+nginx/cert.crt
+nginx/cert.key
