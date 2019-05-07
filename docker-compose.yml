@@ -1,7 +1,6 @@
 version: "3.1"
 networks:
   intra:
-  extra:
   
 services:
   node:
@@ -50,4 +49,3 @@ services:
       - ./nginx:/etc/nginx
     networks:
       - intra
-      - extra
